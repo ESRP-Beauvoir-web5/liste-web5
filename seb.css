@@ -1,0 +1,24 @@
+header{
+
+    width: 100%;
+    height: 15vh;
+    text-align: center;
+    background-color: aqua;
+   
+    border:solid red 2px;
+}
+
+.main{ 
+    text-align: center;
+
+
+}
+
+
+.main a{
+    margin-top: 1rem;
+    text-decoration: none;
+}
+
+
+
