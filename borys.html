@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎭 Page Comique - Le Rire est Contagieux !</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">🎪 Le Cirque du Code 🎪</h1>
+            <p class="subtitle">Où les bugs deviennent des fonctionnalités !</p>
+        </header>
+
+        <div class="joke-section">
+            <div class="joke-card" id="joke1">
+                <h3>🤖 Blague de Programmeur #1</h3>
+                <p class="joke-text">Pourquoi les programmeurs confondent-ils Noël et Halloween ?</p>
+                <button class="reveal-btn" onclick="revealJoke(1)">Révéler la réponse</button>
+                <p class="answer" id="answer1">Parce que Oct 31 = Dec 25 ! 🎃🎄</p>
+            </div>
+
+            <div class="joke-card" id="joke2">
+                <h3>💻 Blague de Programmeur #2</h3>
+                <p class="joke-text">Comment un programmeur ouvre-t-il une porte ?</p>
+                <button class="reveal-btn" onclick="revealJoke(2)">Révéler la réponse</button>
+                <p class="answer" id="answer2">Il fait Ctrl+Alt+Delete ! 🚪</p>
+            </div>
+
+            <div class="joke-card" id="joke3">
+                <h3>🐛 Blague de Programmeur #3</h3>
+                <p class="joke-text">Qu'est-ce qu'un programmeur dit quand il trouve un bug ?</p>
+                <button class="reveal-btn" onclick="revealJoke(3)">Révéler la réponse</button>
+                <p class="answer" id="answer3">"C'est une fonctionnalité !" 🐛✨</p>
+            </div>
+        </div>
+
+        <div class="interactive-section">
+            <h2>🎮 Zone Interactive</h2>
+            <div class="clickable-elements">
+                <div class="clickable" onclick="makeItRain()">🌧️ Cliquez pour faire pleuvoir des emojis !</div>
+                <div class="clickable" onclick="dance()">💃 Cliquez pour faire danser la page !</div>
+                <div class="clickable" onclick="changeColors()">🎨 Cliquez pour changer les couleurs !</div>
+            </div>
+        </div>
+
+        <div class="fun-facts">
+            <h2>🤓 Faits Amusants</h2>
+            <div class="fact-container">
+                <div class="fact">Le premier bug informatique était un vrai insecte ! 🦗</div>
+                <div class="fact">Les programmeurs boivent plus de café que d'eau ☕</div>
+                <div class="fact">99% des programmeurs pensent qu'ils font partie du 1% 🧠</div>
+                <div class="fact">Le code le plus drôle est celui qui fonctionne du premier coup 😅</div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>🎭 Créé avec ❤️ et beaucoup de café ☕</p>
+            <p>PS: Gilles et Borys, vous êtes les meilleurs ! 👨‍💻👨‍💻</p>
+        </footer>
+    </div>
+
+    <div id="emoji-rain"></div>
+
+    <script>
+        // Fonction pour révéler les blagues
+        function revealJoke(jokeNumber) {
+            const answer = document.getElementById(`answer${jokeNumber}`);
+            const btn = event.target;
+            
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                btn.textContent = 'Révéler la réponse';
+            } else {
+                answer.style.display = 'block';
+                btn.textContent = 'Cacher la réponse';
+                answer.classList.add('bounce');
+                setTimeout(() => answer.classList.remove('bounce'), 1000);
+            }
+        }
+
+        // Fonction pour faire pleuvoir des emojis
+        function makeItRain() {
+            const emojis = ['🎪', '🎭', '🤡', '🎨', '🎯', '🎲', '🎸', '🎺', '🎻', '🎹'];
+            const container = document.getElementById('emoji-rain');
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const emoji = document.createElement('div');
+                    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    emoji.className = 'falling-emoji';
+                    emoji.style.left = Math.random() * 100 + 'vw';
+                    emoji.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                    container.appendChild(emoji);
+                    
+                    setTimeout(() => emoji.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        // Fonction pour faire danser la page
+        function dance() {
+            const elements = document.querySelectorAll('.joke-card, .clickable, .fact');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('dance');
+                    setTimeout(() => el.classList.remove('dance'), 1000);
+                }, index * 100);
+            });
+        }
+
+        // Fonction pour changer les couleurs
+        function changeColors() {
+            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#98D8C8'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.backgroundColor = randomColor;
+            
+            setTimeout(() => {
+                document.body.style.backgroundColor = '#f0f0f0';
+            }, 2000);
+        }
+
+        // Animation automatique des cartes
+        setInterval(() => {
+            const cards = document.querySelectorAll('.joke-card');
+            const randomCard = cards[Math.floor(Math.random() * cards.length)];
+            randomCard.classList.add('wiggle');
+            setTimeout(() => randomCard.classList.remove('wiggle'), 500);
+        }, 5000);
+
+        // Effet de survol sur les éléments cliquables
+        document.addEventListener('DOMContentLoaded', () => {
+            const clickables = document.querySelectorAll('.clickable');
+            clickables.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    el.style.transform = 'scale(1.1) rotate(2deg)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
